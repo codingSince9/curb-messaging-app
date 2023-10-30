@@ -31,6 +31,14 @@ code {
   background-color: white;
 }
 
+.login,
+.new-channel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .vertical-line {
   border-left: 2px solid lightslategrey;
   height: 100%;

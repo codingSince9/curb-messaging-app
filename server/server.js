@@ -22,13 +22,16 @@ const io = new Server(server, {
 });
 
 const DATABASE_NAME = "konekt";
+const USER_COLLECTION_NAME = "user";
+const CHANNEL_COLLECTION_NAME = "channel";
+const MESSAGE_COLLECTION_NAME = "message";
 
 io.on('connection', (socket) => {
   socket.on('sendMessage', (data) => {
     io.emit('messageReceived', data);
   });
   socket.on('messageSent', async (data) => {
-    const db = client.db(DATABASE_NAME).collection("message");
+    const db = client.db(DATABASE_NAME).collection(MESSAGE_COLLECTION_NAME);
     await db.insertOne(data);
     io.emit('messageReceived', data);
   });
@@ -56,20 +59,20 @@ run();
 
 app.get("/users", async (req, res) => {
   const db = client.db(DATABASE_NAME);
-  const userData = await db.collection("user").find().toArray();
+  const userData = await db.collection(USER_COLLECTION_NAME).find().toArray();
   res.status(200).json(userData);
 });
 
 app.get("/channels", async (req, res) => {
   const db = client.db(DATABASE_NAME);
-  const channelsData = await db.collection("channel").find().toArray();
+  const channelsData = await db.collection(CHANNEL_COLLECTION_NAME).find().toArray();
   res.status(200).json(channelsData);
 });
 
 app.get("/messages/:channelId", async (req, res) => {
   const { channelId } = req.params;
   const db = client.db(DATABASE_NAME);
-  const messagesData = await db.collection("message").find().toArray();
+  const messagesData = await db.collection(MESSAGE_COLLECTION_NAME).find().toArray();
   const filteredMessages = messagesData.filter((message) => (message.channelId === channelId));
   res.status(200).json(filteredMessages);
 });
@@ -77,13 +80,33 @@ app.get("/messages/:channelId", async (req, res) => {
 app.get("/messages/:userId/:channelId", async (req, res) => {
   const { userId, channelId } = req.params;
   const db = client.db(DATABASE_NAME);
-  const messagesData = await db.collection("message").find().toArray();
+  const messagesData = await db.collection(MESSAGE_COLLECTION_NAME).find().toArray();
   const filteredMessages = messagesData.filter(
     (message) => 
     (message.userId === userId && message.channelId === channelId)
     || 
     (message.userId === channelId && message.channelId === userId));
   res.status(200).json(filteredMessages);
+});
+
+app.post("/channel", async (req, res) => {
+  try {
+    const { channelName } = req.body;
+    if (!channelName) {
+      return res.status(400).json({ error: "Channel name is required" });
+    }
+    const db = client.db(DATABASE_NAME).collection(CHANNEL_COLLECTION_NAME);
+    const data = await db.find().toArray();
+    const foundChannel = data.find((channel) => channel.name === channelName);
+    if (foundChannel) {
+      return res.status(400).json({ error: "Channel name already exists" });
+    }
+    await db.insertOne({ name: channelName });
+    res.status(200).json({ message: "Channel created" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 app.post("/login", async (req, res) => {
@@ -93,7 +116,7 @@ app.post("/login", async (req, res) => {
     if (!username) {
       return res.status(400).json({ error: "Username is required" });
     }
-    const db = client.db(DATABASE_NAME).collection("user");
+    const db = client.db(DATABASE_NAME).collection(USER_COLLECTION_NAME);
     const data = await db.find().toArray();
     const foundUser = data.find((user) => user.username === username);
     if (foundUser) {

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
+  const [channelName, setChannelName] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -15,7 +16,6 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         navigate("messaging/", { state: {userId: data.userId} });
       })
       .catch((error) => {
@@ -23,16 +23,43 @@ const Login = () => {
       });
   };
 
+  const handleCreateNewChannel = () => {
+    fetch("http://localhost:8000/channel", {
+      method: "POST",
+      body: JSON.stringify({ channelName }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    setChannelName("");
+  }
+
   return (
     <div className="login-container">
-      <h1>Login</h1>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <button onClick={handleLogin}>Log In</button>
+      <div className="login">
+        <h1>Login</h1>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <button onClick={handleLogin}>Log In</button>
+      </div>
+      <div className="new-channel">
+        <h1>Create a new messaging channel</h1>
+        <input
+          type="text"
+          placeholder="Channel Name"
+          value={channelName}
+          onChange={(e) => setChannelName(e.target.value)}
+        />
+        <button onClick={handleCreateNewChannel}>Create</button>
+      </div>
     </div>
   );
 };
