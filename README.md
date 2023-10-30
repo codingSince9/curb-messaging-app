@@ -14,12 +14,15 @@ npm install
 ```
 
 ## Configuration
-The server requires a MongoDB database to store user information and messages.\
-You can create a free MongoDB database at [https://www.mongodb.com/](https://www.mongodb.com/).\
+The server requires a MongoDB database to store user information and messages. \
+You can create a free MongoDB database at [https://www.mongodb.com/](https://www.mongodb.com/). \
 
 In the .env file in the server/ directory, replace the DATABASE_URI variable with your MongoDB connection string.\
+```bash
+DATABASE_URI=YOUR_MONOGO_URI
+```
 
-In the server.js file in the server/ directory, replace the following variables with your own values:\
+In the server.js file in the server/ directory, replace the following variables with your own values: \
 
 ```javascript
 // server/server.js
