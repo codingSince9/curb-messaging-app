@@ -1,0 +1,278 @@
+:root {
+  --background-color: #0a051a;
+  --user-color: #007bff;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  background-color: var(--background-color);
+  font-family: serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  margin: 10% auto;
+  padding: 50px;
+  border-radius: 50px;
+  background-color: white;
+}
+
+.vertical-line {
+  border-left: 2px solid lightslategrey;
+  height: 100%;
+  position: fixed;
+  left: 27%;
+  top: 0;
+}
+
+input {
+  border-radius: 20px;
+  font-size: 20px;
+  margin: 30px 10px 30px 30px;
+  padding: 15px;
+  width: 70%;
+  background-color: rgba(106, 106, 124, 0.479);
+  border: none;
+  color: white;
+}
+
+button {
+  background-color: var(--user-color);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3; 
+}
+
+button:disabled {
+  background-color: #ccc;
+  color: #667;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  background-color: #ccc;
+  color: #667;
+}
+
+hr {
+  width: 100%;
+}
+
+.messaging-page {
+  background-color: var(--background-color);
+  display: flex;
+  height: 100%;
+}
+
+.app-name {
+  display: flex;
+  font-size: xxx-large;
+  margin: 20px 0 20px 40px;
+  font-weight: bold;
+}
+
+.app-image {
+  height: 50px;
+  margin-right: 20px;
+}
+
+.navigation-bar {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding-left: 50px;
+  width: 20%;
+  position: fixed;
+}
+
+.channel-list,
+.direct-messages-list {
+  font-size: large;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.channel {
+  text-decoration: none;
+  color: rgb(155, 155, 155);
+}
+
+.direct-message-user {
+  display: flex;
+  align-items: center;
+  color: rgb(155, 155, 155);
+}
+
+.direct-message-user-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.channel.selected,
+.direct-message-user.selected {
+  padding: 7px;
+  border-radius: 10px;
+  background-color: #abb1b841;
+  margin-right: 50px;
+  color: white;
+}
+
+.direct-message {
+  text-decoration: none;
+  color: white;
+}
+
+.select-channel-or-direct-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--background-color);
+  color: white;
+  margin-left: 28%;
+  position: fixed;
+  text-align: center;
+  height: 100%;
+  font-size: xxx-large;
+}
+
+.messages-container {
+  padding: 20px;
+  color: white;
+  margin-top: 150px;
+  margin-left: 30%;
+  width: 69%;
+}
+
+.channel-name {
+  margin: 20px 0 27px 40px;
+  font-size: xxx-large;
+}
+
+.channel-name-divider {
+  margin-top: 28px;
+  margin-left: -4%;
+  width: 100%;
+}
+
+.channel-info {
+  background-color: var(--background-color);
+  color: white;
+  top: 0;
+  width: 70%;
+  margin-left: 30%;
+  padding-right: 150px;
+  z-index: 1;
+  padding: 20px;
+  font-size: xxx-large;
+  position: fixed;
+}
+
+.messages {
+  margin-left: 30px;
+  margin-bottom: 13%;
+  height: 100%;
+}
+
+.message-group-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+}
+
+.message-group {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: fit-content;
+  max-width: 60%;
+}
+
+.message {
+  padding: 10px;
+  margin: 5px 5px 5px 10px;
+  border-radius: 10px;
+  background-color: rgba(128, 128, 128, 0.589);
+  color: white;
+}
+
+.message-current-user {
+  padding: 10px;
+  margin: 5px 5px 5px 10px;
+  border-radius: 10px;
+  background-color: var(--user-color);
+  color: white;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info-img {
+  border-radius: 20px;
+}
+
+.user-info-name {
+  font-size: 25px;
+}
+
+.user-info-timestamp {
+  color: lightgray;
+}
+
+.message-form {
+  background-color: var(--background-color);
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 70%;
+}
+
+.form-button {
+  background-color: var(--user-color);
+  color: white;
+  font-size: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 40px 0 40px -90px;
+}
+
+.send-message-image {
+  height: 20px;
+}
+
+.logout-button {
+  color: white;
+  font-size: x-large;
+  text-decoration: none;
+  border-radius: 20px;
+  background-color: var(--user-color);
+  padding: 15px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
