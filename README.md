@@ -14,15 +14,15 @@ npm install
 ```
 
 ## Configuration
-The server requires a MongoDB database to store user information and messages. \
-You can create a free MongoDB database at [https://www.mongodb.com/](https://www.mongodb.com/). \
+The server requires a MongoDB database to store user information and messages.\
+You can create a free MongoDB database at [https://www.mongodb.com/](https://www.mongodb.com/).\
 
-In the .env file in the server/ directory, replace the DATABASE_URI variable with your MongoDB connection string.\
+In the .env file in the server/ directory, replace the DATABASE_URI variable with your MongoDB connection string.
 ```bash
 DATABASE_URI=YOUR_MONOGO_URI
 ```
 
-In the server.js file in the server/ directory, replace the following variables with your own values: \
+In the server.js file in the server/ directory, replace the following variables with your own values:
 
 ```javascript
 // server/server.js
@@ -55,3 +55,4 @@ First page will be a "Log In" page where you can also create a new channel.\
 Log in is very simple and does not require a password.\
 If you want to log in as a new user, simply enter a new username and click "Log In".\
 If you want to log in as an existing user, enter the username of the user you want to log in as and click "Log In".\
+After login you can select a channel from a list of channels or a user from a list of logged in users and start messaging!
